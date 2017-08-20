@@ -8,6 +8,7 @@ export default class ControlForm extends React.Component {
     }
   }
   handleChange(e) {
+    console.log(this)
     console.log(this.textInput.value)
     let inputStr = ''
     if (e.target.value.length >= 8) {
@@ -19,27 +20,38 @@ export default class ControlForm extends React.Component {
       userInput: inputStr
     })
   }
-  clearAndFocusInput() {
+  // 自定义函数是普通函数，调用时要么使用.bind(this)绑定，要么使用箭头函数调用
+  handleDefault() {
+    console.log(this)
+    this.textInput1.value = 'default'
+  }
+  // 普通函数，未绑定this，调用时报错，内部this为null
+  handleBind() {
+    console.log(this)
+    this.textInput2.value = 'bind'
+  }
+  // 自定义函数是箭头函数，调用时可以不使用.bind(this)，直接调用
+  clearAndFocusInput = () => {
     this.setState({userInput: ''}, () => this.textInput.focus())
   }
   render() {
     return (
       <div>
-        <div onClick = {this.clearAndFocusInput.bind(this)}>
+        <div onClick = {this.clearAndFocusInput}>
           Click to Focus and Reset
         </div>
-        {/* 受控表单组件改变输入框值 */}
-        <input type="text" ref={(input) => (this.textInput = input)} value={this.state.userInput} onChange={this.handleChange.bind(this)}/>
+        {/* 受控表单组件改变输入框值，如果handleChange不是箭头函数，必须要是用.bind(this)指定this指向 */}
+        <input type="text" ref={(input) => (this.textInput = input)} value={this.state.userInput} onChange={(e) => this.handleChange(e)}/>
         <br/>
         {/* 受控表单组件写死value值, 永远不会改变 */}
         {/* 报错, 受控表单不能设置value属性, 必须用onChange事件改变value */}
-        <input type="text" ref={(input) => (this.textInput1 = input)} value="hello" onChange={this.handleChange.bind(this)}/>
+        <input type="text" ref={(input) => (this.textInput1 = input)} defaultValue="hello" onClick={() => this.handleDefault()}/>
         <br/>
-        {/* 只要写死value值就是受控表单 */}
+        {/* 只要写死value值就是受控表单, React表单组件不能设置value值，如果必须要设置，可以用defaultValue */}
         <input type="text" value="hello"/>
         <br/>
         {/* 非受控表单组件里面输入框值改变不受react控制 */}
-        <input type="text" ref={(input) => (this.textInput2 = input)}/>
+        <input type="text" ref={(input) => (this.textInput2 = input)} onClick={this.handleBind}/>
         <br/>
         {/* 普通表单 */}
         <input type="text"/>
