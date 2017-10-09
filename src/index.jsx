@@ -14,15 +14,15 @@ import ControlForm from './components/ControlForm.jsx'
 // 性能测试
 import Perf from 'react-addons-perf'
 if (__DEV__) {
-  window.Perf = Perf
+    window.Perf = Perf
 }
 
 // 测试webpack.DefinePlugin设置的全局变量是否生效
 if (PRODUCTION) {
-  console.log('Production log')
+    console.log('Production log')
 }
 
 ReactDom.render(
-  <ControlForm/>,
-  document.getElementById('app')
+    <ControlForm />,
+    document.getElementById('app')
 )

@@ -14,8 +14,9 @@ module.exports = {
 	],
 	rules: {
 		'arrow-parens': 0,
-		'generator-star-spacing': 0,
 		'comma-dangle': ['error', 'only-multiline'],
+		'generator-star-spacing': 0,
+		'indent': 0,
 		'semi': 0,
 		'space-before-function-paren': 0
 	},
