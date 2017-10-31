@@ -6,10 +6,13 @@ export default class ControlForm extends React.Component {
         this.state = {
             userInput: ''
         }
+        // this.handleChange = this.handleChange.bind(this)
     }
-    handleChange(e) {
+    // 如果未传其他参数(或者箭头函数只传了一个形参, 则第一个参数 data 代表鼠标事件; 否则按照实参传递顺序判断鼠标事件
+    handleChange(data, e) {
+        console.log(data)
         console.log(this)
-        console.log(this.textInput.value)
+        console.log(this.textInput.value) // Dom方式取input输入框的值
         let inputStr = ''
         if (e.target.value.length >= 8) {
             inputStr = e.target.value.slice(0, 5) + '...'
@@ -26,7 +29,8 @@ export default class ControlForm extends React.Component {
         this.textInput1.value = 'default'
     }
     // 普通函数，未绑定this，调用时报错，内部this为null
-    handleBind() {
+    handleBind(e) {
+        console.log(e.target.value)
         console.log(this)
         this.textInput2.value = 'bind'
     }
@@ -41,7 +45,7 @@ export default class ControlForm extends React.Component {
                     Click to Focus and Reset
         </div>
                 {/* 受控表单组件改变输入框值，如果handleChange不是箭头函数，必须要是用.bind(this)指定this指向 */}
-                <input type="text" ref={(input) => (this.textInput = input)} value={this.state.userInput} onChange={(e) => this.handleChange(e)} />
+                <input type="text" ref={(input) => (this.textInput = input)} value={this.state.userInput} onChange={(x) => this.handleChange('data', x)} />
                 <br />
                 {/* 受控表单组件写死value值, 永远不会改变 */}
                 {/* 报错, 受控表单不能设置value属性, 必须用onChange事件改变value */}
