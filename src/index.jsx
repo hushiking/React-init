@@ -5,11 +5,12 @@ import ReactDom from 'react-dom'
 // import Life from './components/Life.jsx'
 // import GainDom from './components/GainDom.jsx'
 // import ListenEvent from './components/ListenEvent.jsx'
-import ControlForm from './components/ControlForm.jsx'
+// import ControlForm from './components/ControlForm.jsx'
 // import Combine from './components/Combine.jsx'
 // import CheckProps from './components/CheckProps.jsx'
 // import Context from './components/Context.jsx'
 // import Animate from './components/Animate.jsx'
+import Demo from './components/Demo.jsx'
 
 // 性能测试
 import Perf from 'react-addons-perf'
@@ -23,6 +24,6 @@ if (PRODUCTION) {
 }
 
 ReactDom.render(
-    <ControlForm />,
+    <Demo />,
     document.getElementById('app')
 )
